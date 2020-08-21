@@ -34,4 +34,6 @@ public interface CustomerService {
     List<Object[]> getWeekDatas(Integer companyId);
 
     Pagination getPageNew(Integer id, Integer pageSize, Integer current);
+
+    void update(Customer customer);
 }

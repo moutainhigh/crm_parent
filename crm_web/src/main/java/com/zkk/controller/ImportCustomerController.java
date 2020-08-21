@@ -317,6 +317,12 @@ public class ImportCustomerController {
         Emp emp = empService.getEmpByUsername(account);
         return customerService.getPageNew(emp.getId(),pageSize,current);
     }
+
+    @PostMapping("/update")
+    public String update(@RequestBody Customer customer){
+        customerService.update(customer);
+        return "ok";
+    }
 }
 
 

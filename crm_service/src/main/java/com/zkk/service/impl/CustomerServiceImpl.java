@@ -83,4 +83,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Pagination getPageNew(Integer id, Integer pageSize, Integer current) {
         return customerDao.getPage("from Customer where emp.id = ?1",current,pageSize,id);
     }
+
+    @Override
+    public void update(Customer customer) {
+        customerDao.update(customer);
+    }
 }
