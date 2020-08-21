@@ -312,6 +312,11 @@ public class ImportCustomerController {
         return "ok";
     }
 
+    @GetMapping("/page/{pageSize}/{current}/{account}")
+    public Pagination getNewPage(@PathVariable Integer pageSize,@PathVariable Integer current,@PathVariable String account){
+        Emp emp = empService.getEmpByUsername(account);
+        return customerService.getPageNew(emp.getId(),pageSize,current);
+    }
 }
 
 

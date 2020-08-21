@@ -32,4 +32,6 @@ public interface CustomerService {
     List<Object[]> getMonthStatistics(Integer companyId, String format);
 
     List<Object[]> getWeekDatas(Integer companyId);
+
+    Pagination getPageNew(Integer id, Integer pageSize, Integer current);
 }

@@ -78,4 +78,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Object[]> getWeekDatas(Integer companyId) {
         return customerDao.selectBySql("SELECT add_person_name,COUNT(id) from customer where WEEK(create_date)=WEEK(now()) and company_id=?1 GROUP BY add_person_name",companyId);
     }
+
+    @Override
+    public Pagination getPageNew(Integer id, Integer pageSize, Integer current) {
+        return customerDao.getPage("from Customer where emp.id = ?1",current,pageSize,id);
+    }
 }
