@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+    <jaxws:server address="/wstest" serviceClass="com.zkk.ws.WSInterface">
+        <jaxws:serviceBean>
+            <ref bean="wsInterface"/>
+        </jaxws:serviceBean>
+    </jaxws:server>
+
+    <jaxws:server address="/wsstate" serviceClass="com.zkk.ws.getStateWS">
+        <jaxws:serviceBean>
+            <ref bean="getStateWS"/>
+        </jaxws:serviceBean>
+    </jaxws:server>
+    <!--配置webServic服务实现类-->
+    <bean id="wsInterface" class="com.zkk.ws.impl.WSInterfaceImpl"/>
+    <bean id="getStateWS" class="com.zkk.ws.impl.getStateWSImpl"/>
+</beans>
