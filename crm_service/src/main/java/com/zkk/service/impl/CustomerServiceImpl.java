@@ -38,25 +38,25 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateEmp(Integer[] ids, Integer companyId, Integer deptId, Integer empId) {
         for (Integer id : ids) {
-            customerDao.update("update Customer set company_id = ?1,department_id = ?2,employee_id = ?3 where id = ?4", companyId, deptId, empId, id);
+            customerDao.update("update Customer set company_id = ?1,department_id = ?2,employee_id = ?3,state = 2 where id = ?4", companyId, deptId, empId, id);
         }
     }
 
     @Override
     public void updateDept(Integer[] ids, Integer companyId, Integer deptId) {
         for (Integer id : ids) {
-            customerDao.update("update Customer set company_id = ?1,department_id = ?2 where id = ?3", companyId, deptId, id);
+            customerDao.update("update Customer set company_id = ?1,department_id = ?2,state = 1 where id = ?3", companyId, deptId, id);
         }
     }
 
     @Override
     public void toEmpAll(Integer companyId, Integer deptId, Integer empId) {
-        customerDao.update("update Customer set company_id = ?1,department_id = ?2,employee_id = ?3",companyId,deptId,empId);
+        customerDao.update("update Customer set company_id = ?1,department_id = ?2,employee_id = ?3,state = 2",companyId,deptId,empId);
     }
 
     @Override
     public void toDeptAll(Integer companyId, Integer deptId) {
-        customerDao.update("update Customer set company_id = ?1,department_id = ?2",companyId,deptId);
+        customerDao.update("update Customer set company_id = ?1,department_id = ?2,state = 1",companyId,deptId);
     }
 
     @Override
