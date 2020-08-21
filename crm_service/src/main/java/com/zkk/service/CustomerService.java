@@ -35,5 +35,5 @@ public interface CustomerService {
 
     Pagination getPageNew(Integer id, Integer pageSize, Integer current);
 
-    void update(Customer customer);
+    void update(Customer customer, Integer state);
 }

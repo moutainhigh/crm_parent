@@ -320,7 +320,8 @@ public class ImportCustomerController {
 
     @PostMapping("/update")
     public String update(@RequestBody Customer customer){
-        customerService.update(customer);
+        Integer state = 3;
+        customerService.update(customer,state);
         return "ok";
     }
 }
