@@ -77,7 +77,7 @@ public class Emp extends BaseEntity{
     @Column(name = "is_ice")
     private Integer isIce = 0;
     /**
-     * 邮箱是否发送 0未发送 1发送中 2发送成功 3 发送失败
+     * 邮箱是否发送 0未发送 1发送成功 2发送失败
      */
     @Column(name = "is_send")
     private Integer isSend = 0;

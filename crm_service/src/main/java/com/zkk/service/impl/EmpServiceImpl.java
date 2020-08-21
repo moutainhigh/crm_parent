@@ -51,7 +51,7 @@ public class EmpServiceImpl implements EmpService {
         //设置初始密码
         emp.setPassword("123456");
         if (!StringUtils.isEmpty(email)) {
-            emp.setIsSend(1);
+            emp.setIsSend(0);
             threadPool.execute(new Runnable() {
                                    @Override
                                    public void run() {
@@ -61,12 +61,10 @@ public class EmpServiceImpl implements EmpService {
                                        while (count <= 3 && !isOk) {
                                            try {
                                                mailUtils.sendMail(email, "欢迎入职", "欢迎您：" + emp.getName() + ",你的账号为：" + emp.getAccount() + ",你的初始密码为" + emp.getPassword());
-                                               emp.setIsSend(2);
                                                isOk = true;//标识成功，结束循环
                                            } catch (Exception e) {
                                                //发送失败
                                                count++;
-                                               emp.setIsSend(3);
                                                e.printStackTrace();
                                                //优化，设置停顿时间
                                                try {
@@ -74,8 +72,6 @@ public class EmpServiceImpl implements EmpService {
                                                } catch (InterruptedException e1) {
                                                    e1.printStackTrace();
                                                }
-                                           } finally {
-
                                            }
                                        }
                                    }
@@ -83,6 +79,7 @@ public class EmpServiceImpl implements EmpService {
             );
         }
         empDao.insert(emp);
+        emp.setIsSend(1);
     }
 
     @Override
@@ -116,6 +113,7 @@ public class EmpServiceImpl implements EmpService {
             empDao.update("update Emp set is_ice = 0 where id = ?1", id);
         }
     }
+
     @Override
     public Emp getEmpByUsername(String username) {
         return empDao.getEmpByUsername(username);
@@ -123,7 +121,7 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public List<Emp> getEmpByDeptId(Integer id) {
-        return empDao.getList("from Emp where dept_id = ?1",id);
+        return empDao.getList("from Emp where dept_id = ?1", id);
     }
 
 }
