@@ -324,6 +324,13 @@ public class ImportCustomerController {
         customerService.update(customer,state);
         return "ok";
     }
+
+    @PostMapping("/setInvalid")
+    public String updateToInvalid(@RequestBody Customer customer){
+        Integer state = 8;
+        customerService.update(customer,state);
+        return "ok";
+    }
 }
 
 
