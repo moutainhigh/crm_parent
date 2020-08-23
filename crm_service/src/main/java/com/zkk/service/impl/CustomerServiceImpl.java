@@ -105,4 +105,9 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDao.getCount("from Customer where dept.id is null and customerRoster.id = ?1",id);
     }
 
+    @Override
+    public Pagination getPage(Integer id, Integer pageSize, Integer current, Integer state) {
+        return customerDao.getPage("from Customer where state = ?1",current,pageSize,state);
+    }
+
 }

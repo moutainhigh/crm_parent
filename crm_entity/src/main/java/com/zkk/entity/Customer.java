@@ -51,7 +51,7 @@ public class Customer implements Serializable {
     @Column(length = 100)
     private String name;                        // 名称
     @Column
-    private String gender = "男";                // 性别
+    private Integer gender = 1;                // 性别 0女 1男
     @Column
     private Integer age;                        // 年龄
     @Column(length = 100)
@@ -64,7 +64,7 @@ public class Customer implements Serializable {
 //	private List<Contacts> contacts;			// 通讯录
 
     @Column(name = "loan_type")
-    private String loanType;                    // 贷款类型
+    private Integer loanType;                    // 贷款类型 1信用贷款 2抵押贷款 3商业贷款 4房贷 5车贷
     @ManyToOne
     @JoinColumn(name = "customer_source_id")
     private CustomerSource customerSource;        // 数据来源
@@ -299,11 +299,11 @@ public class Customer implements Serializable {
         this.name = name;
     }
 
-    public String getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -337,11 +337,11 @@ public class Customer implements Serializable {
 //	public void setContacts(List<Contacts> contacts) {
 //		this.contacts = contacts;
 //	}
-    public String getLoanType() {
+    public Integer getLoanType() {
         return loanType;
     }
 
-    public void setLoanType(String loanType) {
+    public void setLoanType(Integer loanType) {
         this.loanType = loanType;
     }
 

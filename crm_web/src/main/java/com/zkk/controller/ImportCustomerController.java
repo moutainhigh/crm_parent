@@ -363,6 +363,14 @@ public class ImportCustomerController {
         }
         return customerAllocationVos;
     }
+    @GetMapping("/validCustomer/{username}/{current}/{pageSize}")
+    public Pagination getValidCustomer(@PathVariable String username,@PathVariable Integer current,@PathVariable Integer pageSize){
+        Emp emp = empService.getEmpByUsername(username);
+        Integer id = emp.getId();
+        Integer state = 3;
+        return customerService.getPage(id,pageSize,current,state);
+    }
+
 }
 
 

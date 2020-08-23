@@ -42,4 +42,6 @@ public interface CustomerService {
     Integer getImportNum(Integer id);
 
     Integer getNotAllocatedNum(Integer id);
+
+    Pagination getPage(Integer id, Integer pageSize, Integer current, Integer state);
 }
