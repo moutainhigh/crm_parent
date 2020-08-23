@@ -3,6 +3,8 @@ package com.zkk.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,28 +46,29 @@ public class House implements Serializable {
     private Integer landNature;            // 国土性质 1 集体 2 国有
     @Column(name = "construct_date")
     @JsonFormat(pattern = "yyyy")
-    private String constructDate;        // 建造年代
+    private Date constructDate;        // 建造年代
     @Column
-    private String area;                // 面积
+    private BigDecimal area;                // 面积
     @Column
-    private String price;                // 价格
+    private BigDecimal price;                // 价格
     @Column(name = "decorate_case")
     private Integer decorateCase;        // 装修情况 1精装 2简装 3清水
-    @Column(name = "user_case")
+    @Column(name = "use_case")
     private String useCase;                // 使用情况
     @Column
-    private String rental;                // 租金/月
+    private BigDecimal rental;                // 租金/月
     @Column
-    private Integer type;                // 类型
-
+    private Integer type;                // 类型 1住宅 2公寓 3别墅
+    @Column(name = "customer_id")
+    private Integer customerId;
     public House() {
         super();
     }
 
     public House(String placeArea, String placeStreet, String placeDetail,
-                 String placePremise, Integer landNature, String constructDate,
-                 String area, String price, Integer decorateCase, String useCase,
-                 String rental, Integer type) {
+                 String placePremise, Integer landNature, Date constructDate,
+                 BigDecimal area, BigDecimal price, Integer decorateCase, String useCase,
+                 BigDecimal rental, Integer type) {
         super();
         this.placeArea = placeArea;
         this.placeStreet = placeStreet;
@@ -84,8 +87,8 @@ public class House implements Serializable {
     //用于初始化空的房产对象
     public House(Integer id, String placeArea, String placeStreet,
                  String placeDetail, String placePremise, Integer landNature,
-                 String constructDate, String area, String price,
-                 Integer decorateCase, String useCase, String rental) {
+                 Date constructDate, BigDecimal area, BigDecimal price,
+                 Integer decorateCase, String useCase, BigDecimal rental) {
         super();
         this.id = id;
         this.placeArea = placeArea;
@@ -149,27 +152,27 @@ public class House implements Serializable {
         this.landNature = landNature;
     }
 
-    public String getConstructDate() {
+    public Date getConstructDate() {
         return constructDate;
     }
 
-    public void setConstructDate(String constructDate) {
+    public void setConstructDate(Date constructDate) {
         this.constructDate = constructDate;
     }
 
-    public String getArea() {
+    public BigDecimal getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(BigDecimal area) {
         this.area = area;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -189,11 +192,11 @@ public class House implements Serializable {
         this.useCase = useCase;
     }
 
-    public String getRental() {
+    public BigDecimal getRental() {
         return rental;
     }
 
-    public void setRental(String rental) {
+    public void setRental(BigDecimal rental) {
         this.rental = rental;
     }
 
@@ -205,6 +208,13 @@ public class House implements Serializable {
         this.type = type;
     }
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
 
     //重写hashCode和equals方法,用于清除空对象
     @Override
@@ -316,11 +326,7 @@ public class House implements Serializable {
                 formatNull("街道", placeStreet) +
                 formatNull("详细", placeDetail) +
                 formatNull("楼盘", placePremise) +
-                formatNull("建筑年代", constructDate) +
-                formatNull("面积", area) +
-                formatNull("均价", price) +
-                formatNull("使用情况", useCase) +
-                formatNull("租金/月", rental);
+                formatNull("使用情况", useCase);
     }
 
     private String formatNull(String name, String value) {

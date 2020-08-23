@@ -4,6 +4,7 @@ import com.zkk.entity.Car;
 import com.zkk.entity.CreditCard;
 import com.zkk.service.CarService;
 import com.zkk.service.CreditCardService;
+import com.zkk.service.HouseService;
 import com.zkk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class BusinessController {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private HouseService houseService;
 
     @PostMapping("/card/addCard/{id}")
     public String addCard(@PathVariable Integer id, @RequestBody CreditCard creditCard) {
@@ -68,5 +72,9 @@ public class BusinessController {
     public String delete(@RequestBody Integer ids[]){
         carService.delete(ids);
         return "ok";
+    }
+    @GetMapping("/house/page/{id}/{current}/{pageSize}")
+    public Pagination getHouse(@PathVariable Integer id,@PathVariable Integer current,@PathVariable Integer pageSize){
+        return houseService.getHousePage(id,current,pageSize);
     }
 }
