@@ -1,5 +1,6 @@
 package com.zkk.service;
 
+import com.zkk.entity.House;
 import com.zkk.utils.Pagination;
 
 /**
@@ -9,4 +10,6 @@ import com.zkk.utils.Pagination;
  */
 public interface HouseService {
     Pagination getHousePage(Integer id, Integer current, Integer pageSize);
+
+    void addHouse(House house);
 }

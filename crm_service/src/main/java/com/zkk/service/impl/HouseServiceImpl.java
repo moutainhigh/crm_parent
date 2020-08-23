@@ -1,6 +1,7 @@
 package com.zkk.service.impl;
 
 import com.zkk.dao.HouseDao;
+import com.zkk.entity.House;
 import com.zkk.service.HouseService;
 import com.zkk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Pagination getHousePage(Integer id, Integer current, Integer pageSize) {
         return houseDao.getPage("from House where customerId = ?1",current,pageSize,id);
+    }
+
+    @Override
+    public void addHouse(House house) {
+        houseDao.insert(house);
     }
 }

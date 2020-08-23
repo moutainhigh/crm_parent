@@ -2,6 +2,7 @@ package com.zkk.controller;
 
 import com.zkk.entity.Car;
 import com.zkk.entity.CreditCard;
+import com.zkk.entity.House;
 import com.zkk.service.CarService;
 import com.zkk.service.CreditCardService;
 import com.zkk.service.HouseService;
@@ -56,25 +57,33 @@ public class BusinessController {
     }
 
     @PostMapping("/car/addCar/{id}")
-    public String addCar(@PathVariable Integer id,@RequestBody Car car){
+    public String addCar(@PathVariable Integer id, @RequestBody Car car) {
         car.setCustomerId(id);
         carService.add(car);
         return "ok";
     }
 
     @PostMapping("/car/updateCar")
-    public String updateCar(@RequestBody Car car){
+    public String updateCar(@RequestBody Car car) {
         carService.update(car);
         return "ok";
     }
 
     @PostMapping("/car/deleteCar")
-    public String delete(@RequestBody Integer ids[]){
+    public String delete(@RequestBody Integer ids[]) {
         carService.delete(ids);
         return "ok";
     }
+
     @GetMapping("/house/page/{id}/{current}/{pageSize}")
-    public Pagination getHouse(@PathVariable Integer id,@PathVariable Integer current,@PathVariable Integer pageSize){
-        return houseService.getHousePage(id,current,pageSize);
+    public Pagination getHouse(@PathVariable Integer id, @PathVariable Integer current, @PathVariable Integer pageSize) {
+        return houseService.getHousePage(id, current, pageSize);
+    }
+
+    @PostMapping("/house/addHouse/{id}")
+    public String addHouse(@PathVariable Integer id, @RequestBody House house) {
+        house.setCustomerId(id);
+        houseService.addHouse(house);
+        return "ok";
     }
 }
