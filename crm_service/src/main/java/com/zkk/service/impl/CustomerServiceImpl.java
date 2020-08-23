@@ -120,4 +120,12 @@ public class CustomerServiceImpl implements CustomerService {
         customerDao.insert(customer);
     }
 
+    @Override
+    public void updateVisibility(Integer[] id) {
+        for (Integer integer : id) {
+            customerDao.update("update Customer set visibility = 0 where id = ?1",id);
+        }
+
+    }
+
 }

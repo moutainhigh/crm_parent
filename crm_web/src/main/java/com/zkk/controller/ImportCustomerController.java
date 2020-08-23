@@ -381,6 +381,11 @@ public class ImportCustomerController {
         customerService.addValidCustomer(customer);
         return "ok";
     }
+    @PostMapping("/validCustomer/keep")
+    public String keepCustomer(@RequestBody Integer id[]){
+        customerService.updateVisibility(id);
+        return "ok";
+    }
 
 }
 

@@ -1,6 +1,10 @@
 package com.zkk.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +21,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="Car")
+@Table(name="car")
 public class Car implements Serializable{
 	private static final long serialVersionUID = 5090823655958329L;
 
@@ -29,25 +33,29 @@ public class Car implements Serializable{
 	private String brand;				//品牌
 
 	@Column(name="price")
-	private String price;				// 购入价值
+	private BigDecimal price;				// 购入价值
 
 	@Column(name="buy_date")
-	private String buyDate;				// 购入时间
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
+	private Date buyDate;				// 购入时间
 
 	@Column(name="loan_status")
 	private String loanStatus;			// 贷款情况
 
 	@Column(name="refund_month")
-	private String refundMonth;			// 月供
+	private BigDecimal refundMonth;			// 月供
 
 	@Column(name="refund_date")
-	private String refundDate;			// 还款时间
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
+	private Date refundDate;			// 还款时间
 
+	@Column(name = "customer_id")
+	private Integer customerId;
 	public Car() {
 		super();
 	}
-	public Car(Integer id, String brand, String price, String buyDate,
-			String loanStatus, String refundMonth, String refundDate) {
+	public Car(Integer id, String brand, BigDecimal price, Date buyDate,
+			String loanStatus, BigDecimal refundMonth, Date refundDate) {
 		super();
 		this.id = id;
 		this.brand = brand;
@@ -69,16 +77,16 @@ public class Car implements Serializable{
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	public String getBuyDate() {
+	public Date getBuyDate() {
 		return buyDate;
 	}
-	public void setBuyDate(String buyDate) {
+	public void setBuyDate(Date buyDate) {
 		this.buyDate = buyDate;
 	}
 	public String getLoanStatus() {
@@ -87,17 +95,25 @@ public class Car implements Serializable{
 	public void setLoanStatus(String loanStatus) {
 		this.loanStatus = loanStatus;
 	}
-	public String getRefundMonth() {
+	public BigDecimal getRefundMonth() {
 		return refundMonth;
 	}
-	public void setRefundMonth(String refundMonth) {
+	public void setRefundMonth(BigDecimal refundMonth) {
 		this.refundMonth = refundMonth;
 	}
-	public String getRefundDate() {
+	public Date getRefundDate() {
 		return refundDate;
 	}
-	public void setRefundDate(String refundDate) {
+	public void setRefundDate(Date refundDate) {
 		this.refundDate = refundDate;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 
 	@Override
@@ -172,11 +188,7 @@ public class Car implements Serializable{
 
 	public String toTagString() {
 		return  formatNull("品牌", brand)+
-				formatNull("购入价值", price)+
-				formatNull("购入时间", buyDate)+
-				formatNull("贷款请款", loanStatus)+
-				formatNull("月供", refundMonth)+
-				formatNull("还款时间", refundDate);
+				formatNull("贷款请款", loanStatus);
 	}
 	private String formatNull(String name,String value){
 		if (value==null||value.trim().equals("")) {

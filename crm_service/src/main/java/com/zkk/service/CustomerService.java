@@ -48,4 +48,6 @@ public interface CustomerService {
     List<Customer> getAdd(Integer id);
 
     void addValidCustomer(Customer customer);
+
+    void updateVisibility(Integer[] id);
 }
