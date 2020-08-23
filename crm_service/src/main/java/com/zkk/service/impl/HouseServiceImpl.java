@@ -32,4 +32,11 @@ public class HouseServiceImpl implements HouseService {
     public void update(House house) {
         houseDao.update(house);
     }
+
+    @Override
+    public void delete(Integer[] ids) {
+        for (Integer id : ids) {
+            houseDao.delete(id);
+        }
+    }
 }

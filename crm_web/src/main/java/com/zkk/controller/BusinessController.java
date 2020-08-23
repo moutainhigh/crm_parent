@@ -70,7 +70,7 @@ public class BusinessController {
     }
 
     @PostMapping("/car/deleteCar")
-    public String delete(@RequestBody Integer ids[]) {
+    public String deleteCar(@RequestBody Integer ids[]) {
         carService.delete(ids);
         return "ok";
     }
@@ -89,6 +89,11 @@ public class BusinessController {
     @PostMapping("/house/updateHouse")
     public String update(@RequestBody House house){
         houseService.update(house);
+        return "ok";
+    }
+    @PostMapping("/house/deleteHouse")
+    public String deleteHouse(@RequestBody Integer[] ids){
+        houseService.delete(ids);
         return "ok";
     }
 }
