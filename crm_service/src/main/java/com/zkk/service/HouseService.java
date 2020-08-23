@@ -12,4 +12,6 @@ public interface HouseService {
     Pagination getHousePage(Integer id, Integer current, Integer pageSize);
 
     void addHouse(House house);
+
+    void update(House house);
 }

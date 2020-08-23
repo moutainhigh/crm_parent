@@ -86,4 +86,9 @@ public class BusinessController {
         houseService.addHouse(house);
         return "ok";
     }
+    @PostMapping("/house/updateHouse")
+    public String update(@RequestBody House house){
+        houseService.update(house);
+        return "ok";
+    }
 }

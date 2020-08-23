@@ -27,4 +27,9 @@ public class HouseServiceImpl implements HouseService {
     public void addHouse(House house) {
         houseDao.insert(house);
     }
+
+    @Override
+    public void update(House house) {
+        houseDao.update(house);
+    }
 }
