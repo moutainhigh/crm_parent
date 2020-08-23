@@ -63,4 +63,10 @@ public class BusinessController {
         carService.update(car);
         return "ok";
     }
+
+    @PostMapping("/car/deleteCar")
+    public String delete(@RequestBody Integer ids[]){
+        carService.delete(ids);
+        return "ok";
+    }
 }

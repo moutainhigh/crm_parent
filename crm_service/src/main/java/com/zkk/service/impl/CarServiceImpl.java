@@ -31,4 +31,11 @@ public class CarServiceImpl implements CarService {
     public void update(Car car) {
         carDao.update(car);
     }
+
+    @Override
+    public void delete(Integer[] ids) {
+        for (Integer id : ids) {
+            carDao.delete(id);
+        }
+    }
 }
