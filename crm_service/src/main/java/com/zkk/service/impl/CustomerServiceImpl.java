@@ -110,4 +110,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDao.getPage("from Customer where state = ?1",current,pageSize,state);
     }
 
+    @Override
+    public List<Customer> getAdd(Integer id) {
+        return customerDao.getList("from Customer where state = 0 and emp.id  = ?1 and dept.id is null",id);
+    }
+
+    @Override
+    public void addValidCustomer(Customer customer) {
+        customerDao.insert(customer);
+    }
+
 }

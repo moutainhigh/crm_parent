@@ -44,4 +44,8 @@ public interface CustomerService {
     Integer getNotAllocatedNum(Integer id);
 
     Pagination getPage(Integer id, Integer pageSize, Integer current, Integer state);
+
+    List<Customer> getAdd(Integer id);
+
+    void addValidCustomer(Customer customer);
 }

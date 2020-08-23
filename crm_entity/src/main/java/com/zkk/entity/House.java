@@ -21,6 +21,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "house")
+@SuppressWarnings("all")
 public class House implements Serializable {
     private static final long serialVersionUID = -2094736881318249012L;
     public static final Integer HOUSE = 1;
@@ -40,7 +41,7 @@ public class House implements Serializable {
     @Column(name = "place_premise")
     private String placePremise;        // 住房位置（楼盘）
     @Column(name = "land_nature")
-    private String landNature;            // 国土性质
+    private Integer landNature;            // 国土性质 1 集体 2 国有
     @Column(name = "construct_date")
     @JsonFormat(pattern = "yyyy")
     private String constructDate;        // 建造年代
@@ -49,7 +50,7 @@ public class House implements Serializable {
     @Column
     private String price;                // 价格
     @Column(name = "decorate_case")
-    private String decorateCase;        // 装修情况
+    private Integer decorateCase;        // 装修情况 1精装 2简装 3清水
     @Column(name = "user_case")
     private String useCase;                // 使用情况
     @Column
@@ -62,8 +63,8 @@ public class House implements Serializable {
     }
 
     public House(String placeArea, String placeStreet, String placeDetail,
-                 String placePremise, String landNature, String constructDate,
-                 String area, String price, String decorateCase, String useCase,
+                 String placePremise, Integer landNature, String constructDate,
+                 String area, String price, Integer decorateCase, String useCase,
                  String rental, Integer type) {
         super();
         this.placeArea = placeArea;
@@ -82,9 +83,9 @@ public class House implements Serializable {
 
     //用于初始化空的房产对象
     public House(Integer id, String placeArea, String placeStreet,
-                 String placeDetail, String placePremise, String landNature,
+                 String placeDetail, String placePremise, Integer landNature,
                  String constructDate, String area, String price,
-                 String decorateCase, String useCase, String rental) {
+                 Integer decorateCase, String useCase, String rental) {
         super();
         this.id = id;
         this.placeArea = placeArea;
@@ -140,11 +141,11 @@ public class House implements Serializable {
         this.placePremise = placePremise;
     }
 
-    public String getLandNature() {
+    public Integer getLandNature() {
         return landNature;
     }
 
-    public void setLandNature(String landNature) {
+    public void setLandNature(Integer landNature) {
         this.landNature = landNature;
     }
 
@@ -172,11 +173,11 @@ public class House implements Serializable {
         this.price = price;
     }
 
-    public String getDecorateCase() {
+    public Integer getDecorateCase() {
         return decorateCase;
     }
 
-    public void setDecorateCase(String decorateCase) {
+    public void setDecorateCase(Integer decorateCase) {
         this.decorateCase = decorateCase;
     }
 
@@ -315,11 +316,9 @@ public class House implements Serializable {
                 formatNull("街道", placeStreet) +
                 formatNull("详细", placeDetail) +
                 formatNull("楼盘", placePremise) +
-                formatNull("国土性质", landNature) +
                 formatNull("建筑年代", constructDate) +
                 formatNull("面积", area) +
                 formatNull("均价", price) +
-                formatNull("装修情况", decorateCase) +
                 formatNull("使用情况", useCase) +
                 formatNull("租金/月", rental);
     }

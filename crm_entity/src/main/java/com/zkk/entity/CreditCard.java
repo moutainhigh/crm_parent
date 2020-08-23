@@ -36,7 +36,8 @@ public class CreditCard implements Serializable{
 	private Date publishCardDate;			// 发卡日期
 	@Column(name = "card_number")
 	private String cardNumber;				// 卡号
-
+	@Column(name = "customer_id")
+	private Integer customerId;
 	public CreditCard() {
 		super();
 	}
@@ -59,6 +60,15 @@ public class CreditCard implements Serializable{
 		this.publishCardDate = publishCardDate;
 		this.cardNumber = cardNumber;
 	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
 	public Integer getId() {
 		return id;
 	}

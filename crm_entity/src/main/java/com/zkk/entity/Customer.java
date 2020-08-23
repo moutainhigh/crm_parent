@@ -1,6 +1,7 @@
 package com.zkk.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.*;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "customer")
+@SuppressWarnings("all")
 public class Customer implements Serializable {
     private static final long serialVersionUID = 6224354187813218246L;
 
@@ -112,37 +114,37 @@ public class Customer implements Serializable {
 
     //------------------------------------------ 3.辅助信息 start -------------------------------------------
     @Column(name = "month_income")
-    private String monthIncome;                        //月收入
+    private Integer monthIncome;                        //月收入 1 3K一下 2 3K-5K 3 5K-8K 4 8K-15K 5 15K+
     @Column
-    private String embodiment;                        // 体现
+    private Integer embodiment;                        // 体现 1现金 2转账
     @Column(name = "social_insurance")
-    private String socialInsurance;                    // 社保
+    private String socialInsurance;                    // 社保 1 个人缴纳 2 公司缴纳一年以内 3 公司缴纳三年以内 4 公司缴纳三年以上
     @Column
-    private String credit;                            // 征信
+    private Integer credit;                            // 征信 1 良好 2 两年以内少数逾期 3 五年以内少数逾期 4 两年以内严重逾期 5 五年以内严重逾期
     @Column(name = "enterprise_nature")
-    private String enterpriseNature;                // 单位性质
+    private Integer enterpriseNature;                // 单位性质 1 企事业单位 2 外资企业 3 上市公司 4 私营企业 5 个体
     @Column(name = "work_year")
-    private String workYear;                        // 工作时间
+    private Integer workYear;                        // 工作时间 1 1年以内 2 1-3年 3 3-5年 4 5年以上
     @Column(name = "required_money")
     private String requiredMoney;                    // 需求资金
     @Column(name = "repayment_limit")
-    private String repaymentLimit;                    // 还款年限
+    private Integer repaymentLimit;                    // 还款年限 1 1年以内 2 1-3年 3 3-5年
     @Column(name = "use_date")
     @Temporal(TemporalType.DATE)
     private Date useDate;                            // 用款时间
     @Column(name = "lending_institution")
-    private String lendingInstitution;                // 推荐贷款机构名称:银行/小贷/私人
+    private Integer lendingInstitution;                // 推荐贷款机构名称:1 银行/2 小贷/3 私人
     @Column
     private String census;                            // 户籍
     @Column
-    private String marriage;                        // 婚姻状况
+    private Integer marriage;                        // 婚姻状况 1 已婚 2 未婚
     @Column(name = "bond_expire_date")
     @Temporal(TemporalType.DATE)
     private Date bondExpireDate;                    // 债权到期时间
     @Column(name = "repayment_type")
-    private String repaymentType;                    // 还款方式
+    private String repaymentType;                    // 还款方式 1 一次性还款 2 分期
     @Column(name = "fund_use")
-    private String fundUse;                            // 用途
+    private Integer fundUse;                            // 用途 1经商 2购房 3装修 4生活消费 5其它
     @Column(name = "customer_character")
     private String customerCharacter;                // 客户性格
 
@@ -171,7 +173,7 @@ public class Customer implements Serializable {
     @Column(name = "add_type")
     private Integer addType;                        //录入客户类型,0:市场录入,1:批量导入,2:业务员添加
     @Column(name = "sign_state")
-    private String signState = "未签单";                //签单状态:已签单/未签单
+    private Integer signState = 0;                //签单状态:0 已签单/1 未签单
     //普通字段：只有前端显示需要的属性，而不需要存在数据库的熟悉
     @Transient
     private Integer countdown;                        //倒计时
@@ -413,19 +415,19 @@ public class Customer implements Serializable {
         this.customerAsset = customerAsset;
     }
 
-    public String getMonthIncome() {
+    public Integer getMonthIncome() {
         return monthIncome;
     }
 
-    public void setMonthIncome(String monthIncome) {
+    public void setMonthIncome(Integer monthIncome) {
         this.monthIncome = monthIncome;
     }
 
-    public String getEmbodiment() {
+    public Integer getEmbodiment() {
         return embodiment;
     }
 
-    public void setEmbodiment(String embodiment) {
+    public void setEmbodiment(Integer embodiment) {
         this.embodiment = embodiment;
     }
 
@@ -437,27 +439,27 @@ public class Customer implements Serializable {
         this.socialInsurance = socialInsurance;
     }
 
-    public String getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(String credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
-    public String getEnterpriseNature() {
+    public Integer getEnterpriseNature() {
         return enterpriseNature;
     }
 
-    public void setEnterpriseNature(String enterpriseNature) {
+    public void setEnterpriseNature(Integer enterpriseNature) {
         this.enterpriseNature = enterpriseNature;
     }
 
-    public String getWorkYear() {
+    public Integer getWorkYear() {
         return workYear;
     }
 
-    public void setWorkYear(String workYear) {
+    public void setWorkYear(Integer workYear) {
         this.workYear = workYear;
     }
 
@@ -469,11 +471,11 @@ public class Customer implements Serializable {
         this.requiredMoney = requiredMoney;
     }
 
-    public String getRepaymentLimit() {
+    public Integer getRepaymentLimit() {
         return repaymentLimit;
     }
 
-    public void setRepaymentLimit(String repaymentLimit) {
+    public void setRepaymentLimit(Integer repaymentLimit) {
         this.repaymentLimit = repaymentLimit;
     }
 
@@ -485,11 +487,11 @@ public class Customer implements Serializable {
         this.useDate = useDate;
     }
 
-    public String getLendingInstitution() {
+    public Integer getLendingInstitution() {
         return lendingInstitution;
     }
 
-    public void setLendingInstitution(String lendingInstitution) {
+    public void setLendingInstitution(Integer lendingInstitution) {
         this.lendingInstitution = lendingInstitution;
     }
 
@@ -501,11 +503,11 @@ public class Customer implements Serializable {
         this.census = census;
     }
 
-    public String getMarriage() {
+    public Integer getMarriage() {
         return marriage;
     }
 
-    public void setMarriage(String marriage) {
+    public void setMarriage(Integer marriage) {
         this.marriage = marriage;
     }
 
@@ -525,11 +527,11 @@ public class Customer implements Serializable {
         this.repaymentType = repaymentType;
     }
 
-    public String getFundUse() {
+    public Integer getFundUse() {
         return fundUse;
     }
 
-    public void setFundUse(String fundUse) {
+    public void setFundUse(Integer fundUse) {
         this.fundUse = fundUse;
     }
 
@@ -619,11 +621,11 @@ public class Customer implements Serializable {
         this.addType = addType;
     }
 
-    public String getSignState() {
+    public Integer getSignState() {
         return signState;
     }
 
-    public void setSignState(String signState) {
+    public void setSignState(Integer signState) {
         this.signState = signState;
     }
 

@@ -255,7 +255,7 @@ public class ImportCustomerController {
                 preparedStatement.setString(4, customers.get(i).getName());
                 preparedStatement.setString(5, customers.get(i).getOtherInfo());
                 preparedStatement.setString(6, customers.get(i).getPhone());
-                preparedStatement.setString(7, customers.get(i).getSignState());
+                preparedStatement.setInt(7, customers.get(i).getSignState());
                 preparedStatement.setInt(8, customers.get(i).getState());
                 preparedStatement.setInt(9, customers.get(i).getVisitCount());
                 preparedStatement.setInt(10, customers.get(i).getCustomerSource().getId());
@@ -369,6 +369,17 @@ public class ImportCustomerController {
         Integer id = emp.getId();
         Integer state = 3;
         return customerService.getPage(id,pageSize,current,state);
+    }
+    @GetMapping("/getAdd/{username}")
+    public List<Customer> getAdd(@PathVariable String username){
+        Emp emp = empService.getEmpByUsername(username);
+        Integer id = emp.getId();
+        return customerService.getAdd(id);
+    }
+    @PostMapping("/addValidCustomer")
+    public String addValidCustomer(@RequestBody Customer customer){
+        customerService.addValidCustomer(customer);
+        return "ok";
     }
 
 }
