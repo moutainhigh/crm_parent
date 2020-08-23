@@ -4,6 +4,7 @@ import com.zkk.entity.Customer;
 import com.zkk.entity.CustomerRoster;
 import com.zkk.entity.CustomerSource;
 import com.zkk.entity.Emp;
+import com.zkk.entity.vo.CustomerAllocationVo;
 import com.zkk.service.CustomerRosterService;
 import com.zkk.service.CustomerService;
 import com.zkk.service.EmpService;
@@ -41,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -210,7 +212,7 @@ public class ImportCustomerController {
         List<Customer> customers = customerMap.values().stream().collect(Collectors.toList());
         System.out.println(customers.size());
         //新增名单对象
-        CustomerRoster customerRoster = customerRosterService.add(new CustomerRoster(customerRosterName));
+        CustomerRoster customerRoster = customerRosterService.add(new CustomerRoster(customerRosterName,new java.util.Date()));
 
         //获取导入类型参数
         Integer importType = Integer.parseInt(request.getParameter("importType"));
@@ -330,6 +332,36 @@ public class ImportCustomerController {
         Integer state = 8;
         customerService.update(customer,state);
         return "ok";
+    }
+
+    @GetMapping("/rosters/{username}")
+    public List<CustomerAllocationVo> getCustomerRosterByName(@PathVariable String username){
+        Emp emp = empService.getEmpByUsername(username);
+        Integer empId = emp.getId();
+        List<Customer> customerList = customerService.getAllCustomerByEmpId(empId);
+        Set<Integer> hashSet = new HashSet<>();
+        List<CustomerAllocationVo> customerAllocationVos = new ArrayList<>();
+        CustomerAllocationVo customerAllocationVo = new CustomerAllocationVo();
+        for (Customer customer : customerList) {
+            Integer id = customer.getCustomerRoster().getId();
+            hashSet.add(id);
+        }
+        Iterator<Integer> iterator = hashSet.iterator();
+        while (iterator.hasNext()){
+            Integer id = iterator.next();
+            CustomerRoster customerRoster = customerRosterService.get(id);
+            customerAllocationVo.setName(customerRoster.getName());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = simpleDateFormat.format(customerRoster.getDate());
+            customerAllocationVo.setDate(format);
+            Integer importNum = customerService.getImportNum(id);
+            customerAllocationVo.setImportNum(importNum);
+            Integer notAllocatedNum = customerService.getNotAllocatedNum(id);
+            customerAllocationVo.setNotAllocatedNum(notAllocatedNum);
+            customerAllocationVo.setAllocatedNum(importNum-notAllocatedNum);
+            customerAllocationVos.add(customerAllocationVo);
+        }
+        return customerAllocationVos;
     }
 }
 

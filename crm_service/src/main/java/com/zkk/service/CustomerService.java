@@ -36,4 +36,10 @@ public interface CustomerService {
     Pagination getPageNew(Integer id, Integer pageSize, Integer current);
 
     void update(Customer customer, Integer state);
+
+    List<Customer> getAllCustomerByEmpId(Integer empId);
+
+    Integer getImportNum(Integer id);
+
+    Integer getNotAllocatedNum(Integer id);
 }

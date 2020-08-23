@@ -43,4 +43,6 @@ public class CustomerDaoImpl extends BaseDaoImpl<Customer, Integer> implements C
         return state;
     }
 
+
+
 }

@@ -15,4 +15,6 @@ public interface CustomerDao extends BaseDao<Customer,Integer>{
     List<Object[]> selectBySql(String sql, Object...params);
 
     Integer getStateByPhone(String phone);
+
+
 }

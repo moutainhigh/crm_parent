@@ -89,4 +89,20 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setState(state);
         customerDao.update(customer);
     }
+
+    @Override
+    public List<Customer> getAllCustomerByEmpId(Integer empId) {
+        return customerDao.getList("from Customer where emp.id = ?1",empId);
+    }
+
+    @Override
+    public Integer getImportNum(Integer id) {
+        return customerDao.getCount("from Customer where customerRoster.id = ?1",id);
+    }
+
+    @Override
+    public Integer getNotAllocatedNum(Integer id) {
+        return customerDao.getCount("from Customer where dept.id is null and customerRoster.id = ?1",id);
+    }
+
 }

@@ -10,4 +10,7 @@ import com.zkk.entity.CustomerRoster;
 public interface CustomerRosterService {
     CustomerRoster add(CustomerRoster customerRoster);
 
+    String getName(Integer id);
+
+    CustomerRoster get(Integer id);
 }

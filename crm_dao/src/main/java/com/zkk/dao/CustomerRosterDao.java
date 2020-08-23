@@ -9,4 +9,6 @@ import com.zkk.entity.CustomerRoster;
  */
 public interface CustomerRosterDao extends BaseDao<CustomerRoster,Integer>{
     CustomerRoster add(CustomerRoster customerRoster);
+
+    String getName(Integer id);
 }

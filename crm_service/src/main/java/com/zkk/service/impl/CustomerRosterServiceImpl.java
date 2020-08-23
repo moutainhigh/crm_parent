@@ -21,4 +21,14 @@ public class CustomerRosterServiceImpl implements CustomerRosterService {
     public CustomerRoster add(CustomerRoster customerRoster) {
         return customerRosterDao.add(customerRoster);
     }
+
+    @Override
+    public String getName(Integer id) {
+        return customerRosterDao.getName(id);
+    }
+
+    @Override
+    public CustomerRoster get(Integer id) {
+        return customerRosterDao.get(id);
+    }
 }
